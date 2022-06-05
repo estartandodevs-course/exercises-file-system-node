@@ -5,7 +5,8 @@
   "license": "MIT",
   "author": "ED Team",
   "scripts": {
-    "test": "jest  --runInBand"
+    "test": "jest  --runInBand",
+    "test:evaluation": "jest --json --outputFile=/tmp/result.json"
   },
   "dependencies": {
     "jest": "^28.1.0"
