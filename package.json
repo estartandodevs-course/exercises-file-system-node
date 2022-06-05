@@ -3,5 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "author": "ED Team"
+  "author": "ED Team",
+  "scripts": {
+    "test": "jest  --runInBand"
+  },
+  "dependencies": {
+    "jest": "^28.1.0"
+  }
 }
