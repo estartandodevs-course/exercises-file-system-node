@@ -32,7 +32,7 @@ describe("File System Service", () => {
   });
 
   it("should be able to remove a file from the data path", async () => {
-    const result = await deleteFile("test-file.txt");
-    expect(result).toEqual("test-file.txt deleted successfully");
+    const result = await deleteFile("test-file-NEW.txt");
+    expect(result).toEqual("test-file-NEW.txt deleted successfully");
   });
 });
