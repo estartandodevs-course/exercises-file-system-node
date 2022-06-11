@@ -8,7 +8,7 @@
     "test": "jest  --runInBand",
     "test:evaluation": "jest --json --outputFile=/tmp/result.json"
   },
-  "dependencies": {
-    "jest": "^28.1.0"
+  "devDependencies": {
+    "jest": "^28.1.1"
   }
 }
