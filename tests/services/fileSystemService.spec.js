@@ -7,13 +7,7 @@ const {
   deleteFile,
 } = require("../../src/services/fileSystemService");
 
-jest.mock("fs", () => ({
-  promises: {
-    writeFile: jest.fn(),
-    rename: jest.fn(),
-    unlink: jest.fn(),
-  },
-}));
+jest.mock("fs");
 
 describe("File System Service", () => {
   it("should return the path ./data where the files are saved", () => {
