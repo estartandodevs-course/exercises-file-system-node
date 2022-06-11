@@ -5,11 +5,17 @@
                 Windows : c:\\caminho-ate-seu-projeto\src\data  
                 Linux/macOs: /caminho-ate-seu-projeto/src/data
 */
+const process = require('node:process');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const getDirectoryDataPath = () => {
   // Implemente aqui o Todo 1
+  const dir = path.join(__dirname, '../data');
+  return dir;
 };
 
+//console.log(getDirectoryDataPath());
 /*
    TODO 2: 
            a) Implemente a função createFile para que ela de forma síncrona
@@ -22,7 +28,14 @@ const getDirectoryDataPath = () => {
 */
 const createFile = async (data, fileName) => {
   // Implemente aqui o Todo 2
+  try {
+    await fs.writeFileSync(`${getDirectoryDataPath()}/${fileName}`, data);
+    return `${fileName} written`;
+  } catch (error) { 
+    return 'Error creating file';
+  }
 };
+ 
 
 /*
    TODO 3: 
@@ -36,7 +49,16 @@ const createFile = async (data, fileName) => {
 */
 const renameFile = async (currentName, newName) => {
   // Implemente aqui o Todo 3
+  try {
+    await fs.renameSync(`${getDirectoryDataPath()}/${currentName}`, `${getDirectoryDataPath()}/${newName}`);
+    return `${currentName} renamed to ${newName}`;
+  } catch (error) {
+    return 'Error renaming file';
+  }
+
 };
+
+renameFile('file1.txt', 'file2.txt');
 
 /*
    TODO 4: 
@@ -50,6 +72,14 @@ const renameFile = async (currentName, newName) => {
 */
 const deleteFile = async (fileName) => {
   // Implemente aqui o Todo 4
+  try {
+    await fs.unlinkSync(`${getDirectoryDataPath()}/${fileName}`);
+    return `${fileName} deleted successfully`;
+  } catch (error) {
+    return 'Error deleting file';
+  }
 };
+
+
 
 module.exports = { getDirectoryDataPath, createFile, renameFile, deleteFile };
