@@ -1,7 +1,7 @@
 const path = require("path")
 const fs = require("fs")
 
-const getDirectoryDataPath = () => path.join(__dirname, "..\\data");
+const getDirectoryDataPath = () => path.join(__dirname, "../data");
 
 const filePath = getDirectoryDataPath() + "\\";
 
@@ -41,7 +41,7 @@ const deleteFile = (fileName) => {
 
 /* Chamadas das funções para testar no CMD */
 
-// console.log(createFile("test data", "test-file.txt"))
+console.log(createFile("test data", "test-file.txt"))
 // console.log(renameFile("test-file.txt", "newTestFile.txt"))
 // console.log(deleteFile("newTestFile.txt"))
 
