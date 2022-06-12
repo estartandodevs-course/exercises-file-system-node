@@ -1,33 +1,33 @@
-const process =  require('node:process');
-const fs = require('node:fs');
-const path = require('node:path');
+const process =  require('process');
+const fs = require('fs');
+const path = require('path');
 
 const getDirectoryDataPath = () => {
   const dir = path.join( __dirname, '../data' );
   return dir;
 };
 
-const createFile = async (data, fileName) => {
+const createFile = (data, fileName) => {
   try {
-    await fs.writeFileSync(`${getDirectoryDataPath()}/${fileName}`, data);
+    fs.writeFileSync(`${getDirectoryDataPath()}/${fileName}`, data);
     return `${fileName} written`;
   } catch (error) {
     return 'Error creating file';
   }
 };
 
-const renameFile = async (currentName, newName) => {
+const renameFile = (currentName, newName) => {
   try {
-    await fs.renameSync(`${getDirectoryDataPath()}/${currentName}`, `${getDirectoryDataPath()}/${newName}`);
+    fs.renameSync(`${getDirectoryDataPath()}/${currentName}`, `${getDirectoryDataPath()}/${newName}`);
     return `${currentName} renamed to ${newName}`;
   } catch (error) {
     return 'Error renaming file';
   }
 };
 
-const deleteFile = async (fileName) => {
+const deleteFile = (fileName) => {
   try {
-    await fs.unlinkSync(`${getDirectoryDataPath()}/${fileName}`);
+    fs.unlinkSync(`${getDirectoryDataPath()}/${fileName}`);
     return `${fileName} deleted successfully`;
   } catch (error) {
     return 'Error deleting file';
