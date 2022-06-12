@@ -68,3 +68,4 @@ const deleteFile = async (fileName) => {
 
 //deleteFile('ola.txt')
 
+module.exports = { getDirectoryDataPath, createFile, renameFile, deleteFile };
