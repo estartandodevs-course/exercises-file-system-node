@@ -26,7 +26,6 @@ const createFile = async (data, fileName, fileTipe) => {
 }
 };
 
-//---------------------------------------------------------------------------------------------------------------
 
 const renameFile = async (currentName, newName) => {
    /**
@@ -61,11 +60,5 @@ const deleteFile = async (fileName) => {
 }
 };
 
-
-//createFile("Ola SOu o aquicao", "teste")
-
-//renameFile('teste.txt', 'ola.txt')
-
-//deleteFile('ola.txt')
 
 module.exports = { getDirectoryDataPath, createFile, renameFile, deleteFile };
