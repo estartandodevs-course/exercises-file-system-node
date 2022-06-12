@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 /*
    TODO 1:  Deve retornar o caminho para a pasta src/data 
             independente de la base de sistema operacional 
@@ -6,8 +9,8 @@
                 Linux/macOs: /caminho-ate-seu-projeto/src/data
 */
 
-const getDirectoryDataPath = () => {
-  // Implemente aqui o Todo 1
+const getDirectoryDataPath = () => { 
+    return path.join(__dirname, "../../src/data");
 };
 
 /*
@@ -17,12 +20,15 @@ const getDirectoryDataPath = () => {
            
            b) Essa função além de criar o arquivo deve retornar a mensagem: "fileName written"
            onde fileName é o fileName enviado. 
-
            c) Se ocorrer algum erro, retorne a mensagem: "Error creating file"
 */
 const createFile = async (data, fileName) => {
-  // Implemente aqui o Todo 2
-};
+    try {
+        await fs.writeFileSync(path.join(getDirectoryDataPath(), fileName), data);
+        return `${fileName} written`;
+    } catch (error) {
+        return "Error creating file";
+    }};
 
 /*
    TODO 3: 
@@ -31,12 +37,15 @@ const createFile = async (data, fileName) => {
            
            b) Essa função deve retornar a mensagem: "currentName renamed to newName"
            onde currentName e newName são os valores enviados. 
-
            c) Se ocorrer algum erro, retorne a mensagem: "Error renaming file"
 */
 const renameFile = async (currentName, newName) => {
-  // Implemente aqui o Todo 3
-};
+    try {
+        await fs.renameSync(path.join(getDirectoryDataPath(), currentName), path.join(getDirectoryDataPath(), newName));
+        return `${currentName} renamed to ${newName}`;
+    } catch (error) {
+        return "Error renaming file";
+    }};
 
 /*
    TODO 4: 
@@ -45,11 +54,14 @@ const renameFile = async (currentName, newName) => {
            
            b) Essa função deve retornar a mensagem: "fileName deleted successfully"
            onde fileName é p valor enviado por parâmetro. 
-
            c) Se ocorrer algum erro, retorne a mensagem: "Error deleting file"
 */
 const deleteFile = async (fileName) => {
-  // Implemente aqui o Todo 4
-};
+    try {
+        await fs.unlinkSync(path.join(getDirectoryDataPath(), fileName));
+        return `${fileName} deleted successfully`;
+    } catch (error) {
+        return "Error deleting file";
+    }};
 
 module.exports = { getDirectoryDataPath, createFile, renameFile, deleteFile };
