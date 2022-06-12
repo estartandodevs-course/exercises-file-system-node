@@ -1,55 +1,64 @@
-/*
-   TODO 1:  Deve retornar o caminho para a pasta src/data 
-            independente de la base de sistema operacional 
-            Exemplo:  
-                Windows : c:\\caminho-ate-seu-projeto\src\data  
-                Linux/macOs: /caminho-ate-seu-projeto/src/data
-*/
+const fs = require("fs")
+const path = require('path')
 
-const getDirectoryDataPath = () => {
-  // Implemente aqui o Todo 1
+const getDirectoryDataPath = (fileName) => {
+   return path.join(__dirname, "..", "data", fileName) //*¹Não lembro se fica melhor atribuindo a uma var!? (ou algo semelhante).
 };
 
-/*
-   TODO 2: 
-           a) Implemente a função createFile para que ela de forma síncrona
-           Crie um arquivo com o parâmetro enviado (data) e o nome do arquivo (fileName) na pasta src/data
-           
-           b) Essa função além de criar o arquivo deve retornar a mensagem: "fileName written"
-           onde fileName é o fileName enviado. 
 
-           c) Se ocorrer algum erro, retorne a mensagem: "Error creating file"
-*/
-const createFile = async (data, fileName) => {
-  // Implemente aqui o Todo 2
+const createFile = async (data, fileName, fileTipe) => {
+  /**
+   * fileTipe - parametro opcional
+   */
+  try {
+    if (fileTipe === undefined) { //TESTE Parametro opcional; Funciona, porem tipos ".jpg" não consegue guardar o -data- 'obvious
+      fileTipe = ".txt"
+    }
+    fs.openSync(`${getDirectoryDataPath(fileName)}${fileTipe}`, `ax`) //*¹Pq quando for chamar o path tem que passar a func, fica claro, porem pode melhorar?
+    fs.appendFileSync(`${getDirectoryDataPath(fileName)}${fileTipe}`, data); //*¹P? e se for atribuido a var teria que ser definida fora da func!? Seria mais pratico ou mais legivel ?
+    return console.log(`${fileName} written`);
+  } catch (err) {
+    if (err.code === `EEXIST`) {
+        return console.error(`arquive ${fileName}.txt already exists \n         ^`);
+    } else {
+      return console.log(`Error creating file`)
+    }
+}
 };
 
-/*
-   TODO 3: 
-           a) Implemente a função renameFile para que ela de forma síncrona
-           Renomeie um arquivo com os parâmetro enviados, dê: (currentName) para (newName) na pasta src/data
-           
-           b) Essa função deve retornar a mensagem: "currentName renamed to newName"
-           onde currentName e newName são os valores enviados. 
 
-           c) Se ocorrer algum erro, retorne a mensagem: "Error renaming file"
-*/
 const renameFile = async (currentName, newName) => {
-  // Implemente aqui o Todo 3
+   /**
+   * Necessario passar o nome do arquivo com a extenção
+   * Exemplo: filename.txt
+   *                    ^
+   */
+  try {
+    fs.renameSync(getDirectoryDataPath(currentName), getDirectoryDataPath(newName))
+    return console.log(`${currentName} renamed to ${newName}`)
+  } catch (err) {
+    return console.log(`Error renaming file`)
+  }
 };
 
-/*
-   TODO 4: 
-           a) Implemente a função deleteFile para que ela de forma síncrona
-           delete o arquivo com o parâmetro enviado (fileName) na pasta src/data
-           
-           b) Essa função deve retornar a mensagem: "fileName deleted successfully"
-           onde fileName é p valor enviado por parâmetro. 
 
-           c) Se ocorrer algum erro, retorne a mensagem: "Error deleting file"
-*/
 const deleteFile = async (fileName) => {
-  // Implemente aqui o Todo 4
+  /**
+   * Necessario passar o nome do arquivo com a extenção
+   * Exemplo: filename.txt
+   *                    ^
+   */
+  try {
+    fs.unlinkSync(getDirectoryDataPath(fileName))
+    return console.log(`${fileName} deleted successfully`)
+} catch (err) {
+    if (err.code === 'ENOENT') {
+      return console.log(`There is no file named ${fileName}, please try again \n                         ^`)
+    } else {
+    return console.log(`Error deleting file`)
+    }
+}
 };
+
 
 module.exports = { getDirectoryDataPath, createFile, renameFile, deleteFile };
