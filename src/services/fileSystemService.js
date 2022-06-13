@@ -5,7 +5,6 @@ const getDirectoryDataPath = () => path.join(__dirname, "../data");
 
 const filePath = getDirectoryDataPath() + "\\";
 
-
 const createFile = (data, fileName) => {
   try {
     fs.writeFileSync(filePath + fileName, data)
@@ -15,7 +14,6 @@ const createFile = (data, fileName) => {
     throw new Error("Error creating file")
   }
 };
-
 
 const renameFile = (currentName, newName) => {
   try {
@@ -27,7 +25,6 @@ const renameFile = (currentName, newName) => {
   }
 };
 
-
 const deleteFile = (fileName) => {
   try {
     fs.unlinkSync(filePath + fileName)
@@ -37,13 +34,5 @@ const deleteFile = (fileName) => {
     throw new Error("Error deleting file")
   }
 };
-
-
-/* Chamadas das funções para testar no CMD */
-
-console.log(createFile("test data", "test-file.txt"))
-// console.log(renameFile("test-file.txt", "newTestFile.txt"))
-// console.log(deleteFile("newTestFile.txt"))
-
 
 module.exports = { getDirectoryDataPath, createFile , renameFile, deleteFile };
