@@ -1,55 +1,43 @@
-/*
-   TODO 1:  Deve retornar o caminho para a pasta src/data 
-            independente de la base de sistema operacional 
-            Exemplo:  
-                Windows : c:\\caminho-ate-seu-projeto\src\data  
-                Linux/macOs: /caminho-ate-seu-projeto/src/data
-*/
+const path = require('path'),
+      fs = require('fs');
 
-const getDirectoryDataPath = () => {
-  // Implemente aqui o Todo 1
-};
+const getDirectoryDataPath = () => { return path.join(__dirname,"..","data")};
+const dataPath = getDirectoryDataPath()
 
-/*
-   TODO 2: 
-           a) Implemente a função createFile para que ela de forma síncrona
-           Crie um arquivo com o parâmetro enviado (data) e o nome do arquivo (fileName) na pasta src/data
-           
-           b) Essa função além de criar o arquivo deve retornar a mensagem: "fileName written"
-           onde fileName é o fileName enviado. 
 
-           c) Se ocorrer algum erro, retorne a mensagem: "Error creating file"
-*/
 const createFile = async (data, fileName) => {
-  // Implemente aqui o Todo 2
+  
+  try {
+    fs.writeFileSync(path.join(dataPath,fileName), data, { mode: 0o755 })  
+  } catch (error) {
+    throw new Error('Error creating file')
+  }
+
+  return(`${fileName} written`) 
+
 };
 
-/*
-   TODO 3: 
-           a) Implemente a função renameFile para que ela de forma síncrona
-           Renomeie um arquivo com os parâmetro enviados, dê: (currentName) para (newName) na pasta src/data
-           
-           b) Essa função deve retornar a mensagem: "currentName renamed to newName"
-           onde currentName e newName são os valores enviados. 
 
-           c) Se ocorrer algum erro, retorne a mensagem: "Error renaming file"
-*/
 const renameFile = async (currentName, newName) => {
-  // Implemente aqui o Todo 3
+
+  try {
+    fs.renameSync(path.join(dataPath,currentName),path.join(dataPath,newName));  
+  } catch (error) {
+    throw new Error('there was an error:', error.message);
+  }
+
+  return(`${currentName} renamed to ${newName}`)
+
 };
 
-/*
-   TODO 4: 
-           a) Implemente a função deleteFile para que ela de forma síncrona
-           delete o arquivo com o parâmetro enviado (fileName) na pasta src/data
-           
-           b) Essa função deve retornar a mensagem: "fileName deleted successfully"
-           onde fileName é p valor enviado por parâmetro. 
-
-           c) Se ocorrer algum erro, retorne a mensagem: "Error deleting file"
-*/
 const deleteFile = async (fileName) => {
-  // Implemente aqui o Todo 4
+
+  try {
+    fs.unlinkSync(path.join(dataPath,fileName));
+  } catch(err) {
+    throw new Error("Error deleting file")
+  }
+  return(`${fileName} deleted successfully`)
 };
 
 module.exports = { getDirectoryDataPath, createFile, renameFile, deleteFile };
