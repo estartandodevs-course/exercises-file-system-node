@@ -1,7 +1,7 @@
 const path = require("path")
 const fs = require("fs")
 
-const getDirectoryDataPath = () => path.join(__dirname, "../data");
+const getDirectoryDataPath = () => path.join(__dirname, "..","data");
 
 const filePath = getDirectoryDataPath() + "\\";
 
@@ -34,5 +34,6 @@ const deleteFile = (fileName) => {
     throw new Error("Error deleting file")
   }
 };
+
 
 module.exports = { getDirectoryDataPath, createFile , renameFile, deleteFile };
