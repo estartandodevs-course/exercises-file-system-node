@@ -6,15 +6,14 @@
                 Linux/macOs: /caminho-ate-seu-projeto/src/data
 */
 
-const path = require ('path')
+const path = require ('path');
+const fs = require ('fs');
 
 const getDirectoryDataPath = () => {
   // Implemente aqui o Todo 1
   const dataPath = path.join(__dirname, '..', 'data');
   return dataPath;
 };
-
-getDirectoryDataPath()
 
 /*
    TODO 2: 
@@ -28,6 +27,13 @@ getDirectoryDataPath()
 */
 const createFile = async (data, fileName) => {
   // Implemente aqui o Todo 2
+  let dataPath = getDirectoryDataPath(); 
+
+  fs.writeFileSync(path.join(`${dataPath}`, `${fileName}`), data, (err) => {
+    if (err) throw 'Error creating file';
+  }) 
+
+  return `${fileName} written`;
 };
 
 /*
