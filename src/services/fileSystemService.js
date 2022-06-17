@@ -79,6 +79,15 @@ const renameFile = async (currentName, newName) => {
 */
 const deleteFile = async (fileName) => {
   // Implemente aqui o Todo 4
+  let dataPath = getDirectoryDataPath(); 
+  
+  try {
+    fs.unlinkSync(path.join(`${dataPath}`, `${fileName}`))
+  } catch (err) {
+    throw 'Error deleting file';
+  }
+
+  return `${fileName} deleted successfully`;
 };
 
 module.exports = { getDirectoryDataPath, createFile, renameFile, deleteFile };
