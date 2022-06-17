@@ -29,9 +29,14 @@ const createFile = async (data, fileName) => {
   // Implemente aqui o Todo 2
   let dataPath = getDirectoryDataPath(); 
 
-  fs.writeFileSync(path.join(`${dataPath}`, `${fileName}`), data, (err) => {
-    if (err) throw 'Error creating file';
-  }) 
+  try {
+    fs.writeFileSync(
+      path.join(`${dataPath}`, `${fileName}`), 
+      data
+    );
+  } catch (err) {
+    throw 'Error creating file';
+  }
 
   return `${fileName} written`;
 };
@@ -48,6 +53,18 @@ const createFile = async (data, fileName) => {
 */
 const renameFile = async (currentName, newName) => {
   // Implemente aqui o Todo 3
+  let dataPath = getDirectoryDataPath(); 
+  
+  try {
+    fs.renameSync(
+      path.join(`${dataPath}`, `${currentName}`), 
+      path.join(`${dataPath}`, `${newName}`)
+    );
+  } catch (err) {
+    throw 'Error renaming file';
+  }
+  
+  return `${currentName} renamed to ${newName}`;
 };
 
 /*
