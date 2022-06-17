@@ -6,9 +6,15 @@
                 Linux/macOs: /caminho-ate-seu-projeto/src/data
 */
 
+const path = require ('path')
+
 const getDirectoryDataPath = () => {
   // Implemente aqui o Todo 1
+  const dataPath = path.join(__dirname, '..', 'data');
+  return dataPath;
 };
+
+getDirectoryDataPath()
 
 /*
    TODO 2: 
